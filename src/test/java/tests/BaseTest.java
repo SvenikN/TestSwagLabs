@@ -11,7 +11,8 @@ import org.testng.ITestResult;
 import org.testng.annotations.*;
 import pages.LoginPage;
 import pages.ProductsPage;
-import utils.TestListener;
+import pages.YourCartPage;
+import utils.PropertyReader;
 import java.util.concurrent.TimeUnit;
 
 @Listeners(TestListener.class)
@@ -19,6 +20,9 @@ public class BaseTest {
     WebDriver driver;
     LoginPage loginPage;
     ProductsPage productsPage;
+    YourCartPage yourCartPage;
+    String user;
+    String password;
 
     @Parameters({"browser"})
     @Step("Открытие браузера")
@@ -35,8 +39,12 @@ public class BaseTest {
         }
         driver.manage().timeouts().implicitlyWait(6, TimeUnit.SECONDS);
         context.setAttribute("driver", driver);
+        System.setProperty("BASE_URL", PropertyReader.getProperty("TestSwagLabs.url"));
+        user = PropertyReader.getProperty("TestSwagLabs.user");
+        password = PropertyReader.getProperty("TestSwagLabs.password");
         loginPage = new LoginPage(driver);
         productsPage = new ProductsPage(driver);
+        yourCartPage = new YourCartPage(driver);
     }
 
     @Step("Закрытие браузера")

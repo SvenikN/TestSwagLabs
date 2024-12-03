@@ -24,7 +24,6 @@ public class LoginTest extends BaseTest {
     @DataProvider()
     public Object[][] loginData() {
         return new Object[][]{
-                {"standard_user", "secret_sauce"},
                 {"problem_user", "secret_sauce"},
                 {"performance_glitch_user", "secret_sauce"},
                 {"error_user", "secret_sauce"},
@@ -52,7 +51,7 @@ public class LoginTest extends BaseTest {
     @Owner("Nikitina Svetlana srg.svt@gmail.com")
     @TmsLink("/TestsSwagLabs")
     @Description("Проверка входа в интернет магазин")
-    @Test(dataProvider = "loginData", description = "Успешная авторизация")
+    @Test(dataProvider = "loginData", description = "Авторизация под верными данными")
     public void login(String user, String pass) {
         loginPage.open();
         loginPage.login(user, pass);

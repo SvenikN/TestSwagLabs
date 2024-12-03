@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.SplittableRandom;
 
 public class ProductsPage extends BasePage{
 
@@ -16,6 +17,7 @@ public class ProductsPage extends BasePage{
     private final String ADD_TO_CART_PATTERN = "//div[text()='%s']//ancestor::div[@class='inventory_item']//button";
     private final By TITLE = (By.cssSelector("[class=title]"));
     private final By PRODUCT = (By.xpath("//*[text()='Products']"));
+    private final By BUTTON = (By.xpath("//*[text()='Add to cart']"));
 
     public String getTitle() {
         return driver.findElement(TITLE).getText();
@@ -50,7 +52,7 @@ public class ProductsPage extends BasePage{
 
     @Step("Загрузка страницы Продукты")
     public void isOpened() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[text()='Add to cart']")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(BUTTON));
     }
 
     @Step("Получение текста кнопки")
@@ -65,10 +67,22 @@ public class ProductsPage extends BasePage{
 
     @Step("Добавление всех товаров в корзину")
     public ArrayList<String> addToCart() {
-        List<WebElement> allButtons = driver.findElements(By.xpath("//*[text()='Add to cart']"));
+        List<WebElement> allButtons = driver.findElements(BUTTON);
         for (WebElement button: allButtons) {
             button.click();
         }
         return null;
+    }
+
+    @Step("Получение описания товара")
+    public String cartProductDesc(String name) {
+        String names = String.format("//div[text()='%s']//following::*[@class='inventory_item_desc']", name);
+        return driver.findElement(By.xpath(names)).getText();
+    }
+
+    @Step("Получение цены товара")
+    public String cartProductPrice(String name) {
+        String price = String.format("//div[text()='%s']/ancestor::*[@class='inventory_item_description']/child::*[@class='pricebar']/child::*[@class='inventory_item_price']", name);
+        return driver.findElement(By.xpath(price)).getText();
     }
 }
