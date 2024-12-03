@@ -10,9 +10,11 @@ public class YourCartPage extends BasePage{
         super(driver);
     }
 
+    private final By REMOVE = (By.xpath("//*[text()='Remove']"));
+
     @Step("Удаление товара из корзины")
     public boolean deleteProductIsCart() {
-        driver.findElement(By.xpath("//*[text()='Remove']")).click();
+        driver.findElement(REMOVE).click();
         int name = driver.findElements(By.xpath("//*[text()='Sauce Labs Bolt T-Shirt']")).size();
         if (name == 0) {
             return true;

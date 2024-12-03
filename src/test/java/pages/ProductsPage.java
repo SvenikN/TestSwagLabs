@@ -15,10 +15,13 @@ public class ProductsPage extends BasePage{
     }
 
     private final String ADD_TO_CART_PATTERN = "//div[text()='%s']//ancestor::div[@class='inventory_item']//button";
+    private final String DESCRIPTION_PRODUCT_PATTERN = "//div[text()='%s']//following::*[@class='inventory_item_desc']";
+    private final String PRICE_PRODUCT_PATTERN = "//div[text()='%s']/ancestor::*[@class='inventory_item_description']/child::*[@class='pricebar']/child::*[@class='inventory_item_price']";
     private final By TITLE = (By.cssSelector("[class=title]"));
     private final By PRODUCT = (By.xpath("//*[text()='Products']"));
     private final By BUTTON = (By.xpath("//*[text()='Add to cart']"));
 
+    @Step("Получение названия страницы")
     public String getTitle() {
         return driver.findElement(TITLE).getText();
     }
@@ -76,13 +79,13 @@ public class ProductsPage extends BasePage{
 
     @Step("Получение описания товара")
     public String cartProductDesc(String name) {
-        String names = String.format("//div[text()='%s']//following::*[@class='inventory_item_desc']", name);
-        return driver.findElement(By.xpath(names)).getText();
+        String description = String.format(DESCRIPTION_PRODUCT_PATTERN, name);
+        return driver.findElement(By.xpath(description)).getText();
     }
 
     @Step("Получение цены товара")
     public String cartProductPrice(String name) {
-        String price = String.format("//div[text()='%s']/ancestor::*[@class='inventory_item_description']/child::*[@class='pricebar']/child::*[@class='inventory_item_price']", name);
+        String price = String.format(PRICE_PRODUCT_PATTERN, name);
         return driver.findElement(By.xpath(price)).getText();
     }
 }
