@@ -15,15 +15,17 @@ public class LoginPage extends BasePage{
     private final By ERROR_MESSAGE = By.xpath("//h3[text()]");
 
     @Step("Загрузка страницы Логина")
-    public void open() {
+    public LoginPage open() {
         driver.get(BASE_URL);
+        return this;
     }
 
     @Step("Вводим данные {user} и {password}")
-    public void login(String user, String password) {
+    public LoginPage login(String user, String password) {
         driver.findElement(USERNAME_INPUT).sendKeys(user);
         driver.findElement(PASSWORD_INPUT).sendKeys(password);
         driver.findElement(LOGIN_BUTTON).submit();
+        return this;
     }
 
     @Step("Получаем текст из сообщения об ошибке")

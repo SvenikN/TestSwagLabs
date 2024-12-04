@@ -14,8 +14,9 @@ public class YourCartTest extends BaseTest{
     @Owner("Nikitina Svetlana srg.svt@gmail.com")
     @Test(description = "Удаление товара из корзины")
     public void deleteProductIsCart() {
-        loginPage.open();
-        loginPage.login(user, password);
+        loginPage
+                .open()
+                .login(user, password);
         productsPage.isOpened();
         productsPage.addToCart("Sauce Labs Bolt T-Shirt");
         productsPage.openCart();

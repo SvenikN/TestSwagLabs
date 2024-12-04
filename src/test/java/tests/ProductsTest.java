@@ -40,8 +40,9 @@ public class ProductsTest extends BaseTest{
     @Owner("Nikitina Svetlana srg.svt@gmail.com")
     @Test(description = "Смена статуса кнопки Добавить в корзину/Удалить")
     public void buttonStatus() {
-        loginPage.open();
-        loginPage.login(user, password);
+        loginPage
+                .open()
+                .login(user, password);
         productsPage.isOpened();
         productsPage.addToCart();
         ArrayList<String> namesButton = productsPage.getButtonNames();
@@ -56,8 +57,9 @@ public class ProductsTest extends BaseTest{
     @Owner("Nikitina Svetlana srg.svt@gmail.com")
     @Test(dataProvider = "productName", description = "Добавление товара в корзину")
     public void addProductsInCart(String name) {
-        loginPage.open();
-        loginPage.login(user, password);
+        loginPage
+                .open()
+                .login(user, password);
         productsPage.isOpened();
         productsPage.addToCart(name);
         productsPage.openCart();
@@ -71,8 +73,9 @@ public class ProductsTest extends BaseTest{
     @Owner("Nikitina Svetlana srg.svt@gmail.com")
     @Test(dataProvider = "catalog", description = "Описание продукта")
     public void catalogLists(String name, String description, String price) {
-        loginPage.open();
-        loginPage.login(user, password);
+        loginPage
+                .open()
+                .login(user, password);
         productsPage.isOpened();
         assertEquals(description, productsPage.cartProductDesc(name), "The description does not match");
         assertEquals(price, productsPage.cartProductPrice(name), "The price does not match");

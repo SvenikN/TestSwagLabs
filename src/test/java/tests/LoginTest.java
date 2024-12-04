@@ -39,8 +39,9 @@ public class LoginTest extends BaseTest {
     @Description("Проверка входа в интернет магазин")
     @Test(dataProvider = "loginDataError", description = "Получение сообщения об ошибке")
     public void errorMessage(String user, String pass, String message) {
-        loginPage.open();
-        loginPage.login(user, pass);
+        loginPage
+                .open()
+                .login(user, pass);
         assertEquals(loginPage.getMessage(), message);
     }
 
@@ -53,8 +54,9 @@ public class LoginTest extends BaseTest {
     @Description("Проверка входа в интернет магазин")
     @Test(dataProvider = "loginData", description = "Авторизация под верными данными")
     public void login(String user, String pass) {
-        loginPage.open();
-        loginPage.login(user, pass);
+        loginPage
+                .open()
+                .login(user, pass);
         assertTrue(productsPage.titleDisplayed(), "Title Product don't visible");
         assertEquals(productsPage.getTitle(), "Products");
     }
