@@ -60,9 +60,10 @@ public class ProductsTest extends BaseTest{
         loginPage
                 .open()
                 .login(user, password);
-        productsPage.isOpened();
-        productsPage.addToCart(name);
-        productsPage.openCart();
+        productsPage
+                .isOpened()
+                .addToCart(name)
+                .openCart();
         assertTrue(productsPage.getProductNames().contains(name), "The product has not been added to the cart");
     }
 

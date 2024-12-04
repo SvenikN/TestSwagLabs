@@ -16,9 +16,10 @@ public class YourCartTest extends BaseTest{
         loginPage
                 .open()
                 .login(user, password);
-        productsPage.isOpened();
-        productsPage.addToCart("Sauce Labs Bolt T-Shirt");
-        productsPage.openCart();
+        productsPage
+                .isOpened()
+                .addToCart("Sauce Labs Bolt T-Shirt")
+                .openCart();
         assertTrue(yourCartPage.deleteProductIsCart(), "Product delete");
     }
 }

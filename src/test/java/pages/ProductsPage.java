@@ -32,14 +32,16 @@ public class ProductsPage extends BasePage{
     }
 
     @Step("Добавление одного товара в корзину со страницы Продукты")
-    public void addToCart(String product) {
+    public ProductsPage addToCart(String product) {
         By addToCart = By.xpath(String.format(ADD_TO_CART_PATTERN, product));
         driver.findElement(addToCart).click();
+        return this;
     }
 
     @Step("Открытие корзины по значку корзина")
-    public void openCart() {
+    public ProductsPage openCart() {
         driver.findElement(By.cssSelector(".shopping_cart_link")).click();
+        return this;
     }
 
     @Step("Получение названия добавленного продукта")
@@ -53,8 +55,9 @@ public class ProductsPage extends BasePage{
     }
 
     @Step("Загрузка страницы Продукты")
-    public void isOpened() {
+    public ProductsPage isOpened() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(BUTTON));
+        return this;
     }
 
     @Step("Получение текста кнопки")
