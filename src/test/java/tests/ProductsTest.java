@@ -81,6 +81,3 @@ public class ProductsTest extends BaseTest{
         assertEquals(price, productsPage.cartProductPrice(name), "The price does not match");
     }
 }
-
-
-

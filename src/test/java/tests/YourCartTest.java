@@ -2,7 +2,6 @@ package tests;
 
 import io.qameta.allure.*;
 import org.testng.annotations.Test;
-
 import static org.testng.Assert.assertTrue;
 
 public class YourCartTest extends BaseTest{

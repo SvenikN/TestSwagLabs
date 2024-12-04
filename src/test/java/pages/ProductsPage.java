@@ -6,7 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.SplittableRandom;
 
 public class ProductsPage extends BasePage{
 
