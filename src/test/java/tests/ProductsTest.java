@@ -38,12 +38,14 @@ public class ProductsTest extends BaseTest{
     @Story("TNS-2.1")
     @Severity(SeverityLevel.NORMAL)
     @Owner("Nikitina Svetlana srg.svt@gmail.com")
+    @Description("Проверка клика на кнопку добавить и ее смена статуса")
     @Test(description = "Смена статуса кнопки Добавить в корзину/Удалить")
     public void buttonStatus() {
         loginPage
                 .open()
                 .login(user, password);
-        productsPage.isOpened();
+        productsPage
+                .isOpened();
         productsPage.addToCart();
         ArrayList<String> namesButton = productsPage.getButtonNames();
         List<String> remove = List.of("Remove", "Remove", "Remove", "Remove", "Remove", "Remove");
@@ -55,6 +57,7 @@ public class ProductsTest extends BaseTest{
     @Story("TNS-2.2")
     @Severity(SeverityLevel.NORMAL)
     @Owner("Nikitina Svetlana srg.svt@gmail.com")
+    @Description("Проверка добавления товара в корзину из каталога")
     @Test(dataProvider = "productName", description = "Добавление товара в корзину")
     public void addProductsInCart(String name) {
         loginPage
@@ -72,12 +75,14 @@ public class ProductsTest extends BaseTest{
     @Story("TNS-2.3")
     @Severity(SeverityLevel.NORMAL)
     @Owner("Nikitina Svetlana srg.svt@gmail.com")
-    @Test(dataProvider = "catalog", description = "Описание продукта")
+    @Description("Проверка описания и цены товара в каталоге")
+    @Test(dataProvider = "catalog", description = "Данные продукта")
     public void catalogLists(String name, String description, String price) {
         loginPage
                 .open()
                 .login(user, password);
-        productsPage.isOpened();
+        productsPage
+                .isOpened();
         assertEquals(description, productsPage.cartProductDesc(name), "The description does not match");
         assertEquals(price, productsPage.cartProductPrice(name), "The price does not match");
     }

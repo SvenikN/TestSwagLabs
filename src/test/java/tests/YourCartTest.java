@@ -11,6 +11,7 @@ public class YourCartTest extends BaseTest{
     @Story("TNS-3.1")
     @Severity(SeverityLevel.NORMAL)
     @Owner("Nikitina Svetlana srg.svt@gmail.com")
+    @Description("Проверка удаления товара из корзины")
     @Test(description = "Удаление товара из корзины")
     public void deleteProductIsCart() {
         loginPage
