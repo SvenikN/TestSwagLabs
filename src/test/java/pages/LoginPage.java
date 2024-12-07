@@ -5,14 +5,14 @@ import org.openqa.selenium.WebDriver;
 
 public class LoginPage extends BasePage{
 
+    private static final By USERNAME_INPUT = By.xpath("//input[@placeholder='Username']");
+    private static final By PASSWORD_INPUT = By.xpath("//input[@placeholder='Password']");
+    private static final By LOGIN_BUTTON = By.xpath("//input[@value='Login']");
+    private final By errorMessage = By.xpath("//h3[text()]");
+
     public LoginPage(WebDriver driver) {
         super(driver);
     }
-
-    private final By USERNAME_INPUT = By.xpath("//input[@placeholder='Username']");
-    private final By PASSWORD_INPUT = By.xpath("//input[@placeholder='Password']");
-    private final By LOGIN_BUTTON = By.xpath("//input[@value='Login']");
-    private final By ERROR_MESSAGE = By.xpath("//h3[text()]");
 
     @Step("Загрузка страницы Логина")
     public LoginPage open() {
@@ -30,6 +30,6 @@ public class LoginPage extends BasePage{
 
     @Step("Получаем текст из сообщения об ошибке")
     public String getMessage() {
-        return driver.findElement(ERROR_MESSAGE).getText();
+        return driver.findElement(errorMessage).getText();
     }
 }

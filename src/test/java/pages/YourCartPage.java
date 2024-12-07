@@ -6,11 +6,11 @@ import org.openqa.selenium.WebDriver;
 
 public class YourCartPage extends BasePage{
 
+    private static final By REMOVE = (By.xpath("//*[text()='Remove']"));
+
     public YourCartPage(WebDriver driver) {
         super(driver);
     }
-
-    private final By REMOVE = (By.xpath("//*[text()='Remove']"));
 
     @Step("Удаление товара из корзины")
     public boolean deleteProductIsCart() {

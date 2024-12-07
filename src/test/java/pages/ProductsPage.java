@@ -9,25 +9,25 @@ import java.util.List;
 
 public class ProductsPage extends BasePage{
 
+    private static final String ADD_TO_CART_PATTERN = "//div[text()='%s']//ancestor::div[@class='inventory_item']//button";
+    private static final String DESCRIPTION_PRODUCT_PATTERN = "//div[text()='%s']//following::*[@class='inventory_item_desc']";
+    private static final String PRICE_PRODUCT_PATTERN = "//div[text()='%s']/ancestor::*[@class='inventory_item_description']/child::*[@class='pricebar']/child::*[@class='inventory_item_price']";
+    private final By title = (By.cssSelector("[class=title]"));
+    private final By product = (By.xpath("//*[text()='Products']"));
+    private final By button = (By.xpath("//*[text()='Add to cart']"));
+
     public ProductsPage(WebDriver driver) {
         super(driver);
     }
 
-    private final String ADD_TO_CART_PATTERN = "//div[text()='%s']//ancestor::div[@class='inventory_item']//button";
-    private final String DESCRIPTION_PRODUCT_PATTERN = "//div[text()='%s']//following::*[@class='inventory_item_desc']";
-    private final String PRICE_PRODUCT_PATTERN = "//div[text()='%s']/ancestor::*[@class='inventory_item_description']/child::*[@class='pricebar']/child::*[@class='inventory_item_price']";
-    private final By TITLE = (By.cssSelector("[class=title]"));
-    private final By PRODUCT = (By.xpath("//*[text()='Products']"));
-    private final By BUTTON = (By.xpath("//*[text()='Add to cart']"));
-
     @Step("Получение названия страницы")
     public String getTitle() {
-        return driver.findElement(TITLE).getText();
+        return driver.findElement(title).getText();
     }
 
     @Step("Отображение названия страницы Продукты")
     public boolean titleDisplayed() {
-        driver.findElement(PRODUCT).isDisplayed();
+        driver.findElement(product).isDisplayed();
         return true;
     }
 
@@ -56,7 +56,7 @@ public class ProductsPage extends BasePage{
 
     @Step("Загрузка страницы Продукты")
     public ProductsPage isOpened() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(BUTTON));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(button));
         return this;
     }
 
@@ -72,7 +72,7 @@ public class ProductsPage extends BasePage{
 
     @Step("Добавление всех товаров в корзину")
     public ArrayList<String> addToCart() {
-        List<WebElement> allButtons = driver.findElements(BUTTON);
+        List<WebElement> allButtons = driver.findElements(button);
         for (WebElement button: allButtons) {
             button.click();
         }
