@@ -2,6 +2,8 @@ package tests;
 import io.qameta.allure.*;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import utils.PropertyReader;
+
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
@@ -9,25 +11,35 @@ public class LoginTest extends BaseTest {
 
     @DataProvider()
     public Object[][] loginDataError() {
+        String user = PropertyReader.getProperty("TestSwagLabs.user");
+        String userLocked = PropertyReader.getProperty("TestSwagLabs.userLocked");
+        String password = PropertyReader.getProperty("TestSwagLabs.password");
+
         return new Object[][] {
-            {"standard_user", "secret", "Epic sadface: Username and password do not match any user in this service"},
-            {"standard","secret_sauce","Epic sadface: Username and password do not match any user in this service"},
-            {"", "secret_sauce", "Epic sadface: Username is required"},
-            {"standard_user","","Epic sadface: Password is required"},
+            {user, "secret", "Epic sadface: Username and password do not match any user in this service"},
+            {"standard", password,"Epic sadface: Username and password do not match any user in this service"},
+            {"", password, "Epic sadface: Username is required"},
+            {user, "","Epic sadface: Password is required"},
             {"", "", "Epic sadface: Username is required"},
-            {" ", "secret_sauce", "Epic sadface: Username and password do not match any user in this service"},
-            {"locked_out_user", "secret_sauce", "Epic sadface: Sorry, this user has been locked out."},
-            {"@#@$","secret_sauce", "Epic sadface: Username and password do not match any user in this service"}
+            {" ", password, "Epic sadface: Username and password do not match any user in this service"},
+            {userLocked, password, "Epic sadface: Sorry, this user has been locked out."},
+            {"@#@$", password, "Epic sadface: Username and password do not match any user in this service"}
         };
     }
 
     @DataProvider()
     public Object[][] loginData() {
+        String userProblem = PropertyReader.getProperty("TestSwagLabs.userProblem");
+        String userGlitch = PropertyReader.getProperty("TestSwagLabs.userGlitch");
+        String userError = PropertyReader.getProperty("TestSwagLabs.userError");
+        String userVisual = PropertyReader.getProperty("TestSwagLabs.userVisual");
+        String password = PropertyReader.getProperty("TestSwagLabs.password");
+
         return new Object[][]{
-                {"problem_user", "secret_sauce"},
-                {"performance_glitch_user", "secret_sauce"},
-                {"error_user", "secret_sauce"},
-                {"visual_user", "secret_sauce"}
+                {userProblem, password},
+                {userGlitch, password},
+                {userError, password},
+                {userVisual, password}
         };
     }
 
